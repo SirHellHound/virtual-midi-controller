@@ -21,13 +21,6 @@ mingw_libs = '''
 def check_common (self):
     self.check(header_name='stdbool.h', mandatory=True)
 
-    # LV2 Support
-    self.check(header_name='lv2/lv2plug.in/ns/lv2core/lv2.h', mandatory=True)
-    self.check(header_name='lilv.h', use='LV2', mandatory=False)
-    self.check_cxx(lib = 'lilv', use='LV2', mandatory=False)
-    self.check(header_name='suil.h', use='LV2', mandatory=False)
-    self.check_cxx(lib = 'suil', use='LV2', mandatory=False)
-
 @conf
 def check_mingw (self):
     for l in mingw_libs.split():

@@ -59,7 +59,8 @@ def configure (conf):
     conf.env.VERSION_STRING = VERSION
 
     conf.define ('VERSION_STRING', conf.env.VERSION_STRING)
-    conf.check_cfg (package='kv-0', uselib_store='KV', args='--cflags --libs', mandatory=True)
+    conf.check_cfg (package='kv_debug-0' if conf.options.debug else 'kv-0', 
+                    uselib_store='KV', args='--cflags --libs', mandatory=True)
     
     print
     juce.display_header ("VMC Configuration")
@@ -72,9 +73,6 @@ def configure (conf):
     juce.display_msg (conf, "CFLAGS", conf.env.CFLAGS)
     juce.display_msg (conf, "CXXFLAGS", conf.env.CXXFLAGS)
     juce.display_msg (conf, "LINKFLAGS", conf.env.LINKFLAGS)
-    
-def common_use_flags():
-    return 'ACCELERATE AUDIO_TOOLBOX AUDIO_UNIT CORE_AUDIO CORE_AUDIO_KIT COCOA CORE_MIDI IO_KIT QUARTZ_CORE'.split()
 
 def build_mac (bld):
     appEnv = bld.env.derive()
@@ -84,7 +82,7 @@ def build_mac (bld):
         target      = 'Applications/MIDI Controller',
         name        = 'VMC',
         env         = appEnv,
-        use         = common_use_flags() + [ 'KV' ],
+        use         = [ 'KV' ],
         mac_app     = True,
         mac_plist   = 'tools/macdeploy/Info.plist'
         # mac_files   = [ 'project/Builds/MacOSX/Icon.icns' ]
@@ -93,7 +91,7 @@ def build_mac (bld):
 def build (bld):
     build_mac (bld)
 
-def deploymac (ctx):
+def macdeploy (ctx):
     call (["tools/macdeploy/appbundle.py",
            "-dmg", "vmc-osx-%s" % VERSION,
            "-volname", "VMC",
