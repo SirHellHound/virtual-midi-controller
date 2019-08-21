@@ -42,9 +42,6 @@ def configure_product_name (conf):
 
 def configure (conf):
     conf.check_ccache()
-    cross.setup_compiler (conf)
-    if len(conf.options.cross) <= 0:
-        conf.prefer_clang()
     conf.load ("compiler_c compiler_cxx ar cross juce")
     conf.check_cxx_version()
 
@@ -63,7 +60,7 @@ def configure (conf):
                     uselib_store='KV', args='--cflags --libs', mandatory=True)
     
     print
-    juce.display_header ("VMC Configuration")
+    juce.display_header ("Virtual MIDI Controller")
     print
     juce.display_msg (conf, "PREFIX", conf.env.PREFIX)
     juce.display_msg (conf, "DATADIR", conf.env.DATADIR)
