@@ -56,7 +56,11 @@ def configure (conf):
     conf.env.VERSION_STRING = VERSION
 
     conf.define ('VERSION_STRING', conf.env.VERSION_STRING)
-    conf.check_cfg (package='kv_debug-0' if conf.options.debug else 'kv-0', 
+    conf.check_cfg (package='juce_audio_utils_debug-5' if conf.options.debug else 'juce_audio_utils-5', 
+                    uselib_store='JUCE_AUDIO_UTILS', args='--cflags --libs', mandatory=True)
+    conf.check_cfg (package='kv_lv2-0' if conf.options.debug else 'kv_lv2-0', 
+                    uselib_store='KV_LV2', args='--cflags', mandatory=True)
+    conf.check_cfg (package='kv_gui_debug-0' if conf.options.debug else 'kv_gui-0', 
                     uselib_store='KV', args='--cflags --libs', mandatory=True)
     
     print
@@ -79,7 +83,7 @@ def build_mac (bld):
         target      = 'Applications/MIDI Controller',
         name        = 'VMC',
         env         = appEnv,
-        use         = [ 'KV' ],
+        use         = [ 'KV', 'KV_LV2', 'JUCE_AUDIO_UTILS' ],
         mac_app     = True,
         mac_plist   = 'tools/macdeploy/Info.plist'
         # mac_files   = [ 'project/Builds/MacOSX/Icon.icns' ]

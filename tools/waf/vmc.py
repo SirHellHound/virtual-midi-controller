@@ -25,18 +25,13 @@ def check_common (self):
 def check_mingw (self):
     for l in mingw_libs.split():
         self.check_cxx(lib=l, uselib_store=l.upper())
-    self.define('JUCE_PLUGINHOST_VST3', 0)
-    self.define('JUCE_PLUGINHOST_VST', 1)
-    self.define('JUCE_PLUGINHOST_AU', 0)
     for flag in '-Wno-multichar -Wno-deprecated-declarations'.split():
         self.env.append_unique ('CFLAGS', [flag])
         self.env.append_unique ('CXXFLAGS', [flag])
 
 @conf
 def check_mac (self):
-    # VST/VST3 OSX Support
-    self.define('JUCE_PLUGINHOST_VST3', 0)
-    self.define('JUCE_PLUGINHOST_VST', 0)
+    pass
 
 @conf
 def check_linux (self):
