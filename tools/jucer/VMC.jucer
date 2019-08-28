@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="Qtdnfm" name="Virtual MIDI Controller" projectType="guiapp"
-              jucerVersion="5.4.3" version="1.0.0" companyName="Kushview" companyCopyright="Copyright (c) 2019 Kushview, LLC"
+              jucerVersion="5.4.3" version="0.1.0" companyName="Kushview" companyCopyright="Copyright (c) 2019 Kushview, LLC"
               companyWebsite="https://kushview.net" companyEmail="support@kushview.net"
               bundleIdentifier="net.kushview.VMC">
   <MAINGROUP id="B7YhNQ" name="Virtual MIDI Controller">

@@ -1,10 +1,9 @@
 *.pch
 
-jucer/Builds
-jucer/JuceLibraryCode/ReadMe.txt
-jucer/JuceLibraryCode/include_*.*
-jucer/JuceLibraryCode/include_*.*
-jucer/JuceLibraryCode/BinaryData*.*
+tools/jucer/Builds
+tools/jucer/JuceLibraryCode/ReadMe.txt
+tools/jucer/JuceLibraryCode/include_*.*
+tools/jucer/JuceLibraryCode/BinaryData*.*
 
 data/*.ai
 
