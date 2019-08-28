@@ -75,17 +75,18 @@ def configure (conf):
 
 def build_mac (bld):
     appEnv = bld.env.derive()
-    bld.program (
+    app = bld.program (
         source      = bld.path.ant_glob ("src/**/*.cpp"),
         includes    = [ 'src', 'src/compat' ],
         target      = 'Applications/MIDI Controller',
         name        = 'VMC',
         env         = appEnv,
-        use         = [ 'KV', 'KV_LV2', 'JUCE_AUDIO_UTILS' ],
-        mac_app     = True,
-        mac_plist   = 'tools/macdeploy/Info.plist'
-        # mac_files   = [ 'project/Builds/MacOSX/Icon.icns' ]
+        use         = [ 'KV', 'JUCE_AUDIO_UTILS' ]
     )
+    if juce.is_mac():
+        app.mac_app     = True,
+        app.mac_plist   = 'tools/macdeploy/Info.plist'
+        # app.mac_files   = [ 'project/Builds/MacOSX/Icon.icns' ]
 
 def build (bld):
     build_mac (bld)
