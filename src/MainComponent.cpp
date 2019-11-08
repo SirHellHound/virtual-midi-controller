@@ -39,7 +39,7 @@ public:
         {
             int value = roundToInt (slider1.getValue());
             owner.controller.addMidiMessage (MidiMessage::controllerEvent (
-                1, 60, value));
+                midiChannel, 60, value));
         };
 
         addAndMakeVisible (slider2);
@@ -49,7 +49,7 @@ public:
         {
             int value = roundToInt (slider2.getValue());
             owner.controller.addMidiMessage (MidiMessage::controllerEvent (
-                1, 61, value));
+                midiChannel, 61, value));
         };
 
         addAndMakeVisible (slider3);
@@ -59,7 +59,7 @@ public:
         {
             int value = roundToInt (slider3.getValue());
             owner.controller.addMidiMessage (MidiMessage::controllerEvent (
-                1, 62, value));
+                midiChannel, 62, value));
         };
 
         addAndMakeVisible (keyboard);
