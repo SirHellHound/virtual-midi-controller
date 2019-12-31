@@ -32,7 +32,10 @@ public:
         addAndMakeVisible (keyboard.get());
     }
 
-    ~VirtualKeyboard() { }
+    ~VirtualKeyboard()
+    {
+        keyboard = nullptr;
+    }
 
     /** Set the MIDI channel to use */
     void setMidiChannel (int channel) { keyboard->setMidiChannel (channel); }
