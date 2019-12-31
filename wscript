@@ -77,7 +77,7 @@ def build_mac (bld):
     appEnv = bld.env.derive()
     app = bld.program (
         source      = bld.path.ant_glob ("src/**/*.cpp"),
-        includes    = [ 'src', 'src/compat' ],
+        includes    = [ 'src', 'src/compat', 'libs/lua', 'libs/lua/lua-5.3.5/src' ],
         target      = 'Applications/MIDI Controller',
         name        = 'VMC',
         env         = appEnv,
