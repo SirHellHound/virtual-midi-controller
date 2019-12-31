@@ -22,6 +22,14 @@
 #include "LookAndFeel.h"
 #include "Controller.h"
 
+#ifndef VMC_WIDTH
+ #define VMC_WIDTH   800
+#endif
+
+#ifndef VMC_HEIGHT
+ #define VMC_HEIGHT  480
+#endif
+
 namespace vmc {
 
 class Application  : public JUCEApplication
@@ -70,17 +78,18 @@ public:
             setUsingNativeTitleBar (true);
             setBackgroundColour (kv::LookAndFeel_KV1::widgetBackgroundColor.darker());
             setContentOwned (new MainComponent (vc), true);
-            centreWithSize (640, 120);
-            setContentComponentSize (640, 120);
-            setResizable (false, false);
-
+            
             if (auto* props = controller.getSettings().getUserSettings())
             {
                 const auto state = props->getValue ("windowPosition", String());
                 if (state.isNotEmpty())
                     restoreWindowStateFromString (state);
             }
-            
+
+            setSize (VMC_WIDTH, VMC_HEIGHT);
+            setContentComponentSize (VMC_WIDTH, VMC_HEIGHT);
+            setResizable (false, false);
+
             setVisible (true);
         }
 
@@ -125,7 +134,6 @@ private:
 
     void setupGlobals()
     {
-        
         controller.reset (new Controller());
         controller->initializeAudioDevice();
     }

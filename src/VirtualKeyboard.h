@@ -45,6 +45,8 @@ public:
         keyboard->setBounds (getLocalBounds());
     }
 
+    MidiKeyboardComponent& getMidiKeyboardComponent() { return *keyboard; }
+
 private:
     std::unique_ptr<MidiKeyboardComponent> keyboard;
 };

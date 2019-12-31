@@ -63,7 +63,10 @@ public:
         };
 
         addAndMakeVisible (keyboard);
-        
+        auto& mkc = keyboard.getMidiKeyboardComponent();
+        mkc.setKeyWidth (48);
+        mkc.setScrollButtonWidth (48);
+
         addAndMakeVisible (program);
         program.setTooltip ("MIDI Program");
         program.setRange (1.0, 128.0, 1.0);
@@ -154,6 +157,7 @@ public:
         program.setBounds (r2.removeFromLeft (64));
         output.setBounds (r2.removeFromRight (120));
 
+        r = r.removeFromBottom (180);
         slider1.setBounds (r.removeFromLeft (18));
         slider2.setBounds (r.removeFromLeft (18));
         // slider3.setBounds (r.removeFromRight (18));
