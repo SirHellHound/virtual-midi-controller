@@ -35,7 +35,7 @@ struct Controller::Impl : public MidiKeyboardStateListener
     {
         audioDeviceManager.setOwned (new AudioDeviceManager ());
        #if JUCE_MAC
-        midiOut.reset (MidiOutput::createNewDevice ("VMC"));
+        midiOut = MidiOutput::createNewDevice ("VMC");
         midiOut->startBackgroundThread();
        #endif
         keyboardState.addListener (this);
@@ -78,10 +78,9 @@ void Controller::initializeAudioDevice()
     
     if (auto* const props = settings.getUserSettings())
     {
-        if (auto* xml = props->getXmlValue ("devices"))
+        if (auto xml = props->getXmlValue ("devices"))
         {
-            initDefault = devices.initialise (32, 32, xml, false).isNotEmpty();
-            deleteAndZero (xml);
+            initDefault = devices.initialise (32, 32, xml.get(), false).isNotEmpty();
         }
     }
     
@@ -109,10 +108,9 @@ void Controller::saveSettings()
 
     if (auto* const props = settings.getUserSettings())
     {
-        if (auto* devicesXml = devices.createStateXml())
+        if (auto devicesXml = devices.createStateXml())
         {
-            props->setValue ("devices", devicesXml);
-            deleteAndZero (devicesXml);
+            props->setValue ("devices", devicesXml.get());
         }
     }
 }

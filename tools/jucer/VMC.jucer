@@ -1,48 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="Qtdnfm" name="Virtual MIDI Controller" projectType="guiapp"
-              jucerVersion="5.4.3" version="0.1.0" companyName="Kushview" companyCopyright="Copyright (c) 2019 Kushview, LLC"
+              jucerVersion="5.4.5" version="0.1.0" companyName="Kushview" companyCopyright="Copyright (c) 2019 Kushview, LLC"
               companyWebsite="https://kushview.net" companyEmail="support@kushview.net"
-              bundleIdentifier="net.kushview.VMC">
+              bundleIdentifier="net.kushview.VMC" headerPath="../../../../libs/lua&#10;../../../../libs/lua/lua-5.3.5/src&#10;"
+              cppLanguageStandard="17">
   <MAINGROUP id="B7YhNQ" name="Virtual MIDI Controller">
-    <GROUP id="{CF3D9FD5-623B-929D-8445-AAA1B8D9FA7C}" name="src">
-      <FILE id="BBYIIA" name="Controller.cpp" compile="1" resource="0" file="../src/Controller.cpp"/>
-      <FILE id="iy2syM" name="Controller.h" compile="0" resource="0" file="../src/Controller.h"/>
-      <FILE id="kHOade" name="Main.cpp" compile="1" resource="0" file="../src/Main.cpp"/>
-      <FILE id="yKqcEQ" name="MainComponent.cpp" compile="1" resource="0"
-            file="../src/MainComponent.cpp"/>
-      <FILE id="gandlE" name="MainComponent.h" compile="0" resource="0" file="../src/MainComponent.h"/>
-      <FILE id="kt19nt" name="Settings.cpp" compile="1" resource="0" file="../src/Settings.cpp"/>
-      <FILE id="n71L8G" name="Settings.h" compile="0" resource="0" file="../src/Settings.h"/>
-      <FILE id="gqPq53" name="VirtualKeyboard.h" compile="0" resource="0"
-            file="../src/VirtualKeyboard.h"/>
+    <GROUP id="{54BD513F-325C-DE33-9719-FC4644070D3D}" name="src">
+      <FILE id="mnxxS6" name="Bindings.cpp" compile="1" resource="0" file="../../src/Bindings.cpp"/>
+      <FILE id="tQ9U4i" name="Bindings.h" compile="0" resource="0" file="../../src/Bindings.h"/>
+      <FILE id="MMME5R" name="Controller.cpp" compile="1" resource="0" file="../../src/Controller.cpp"/>
+      <FILE id="x4Al72" name="Controller.h" compile="0" resource="0" file="../../src/Controller.h"/>
+      <FILE id="SckYVP" name="Device.h" compile="0" resource="0" file="../../src/Device.h"/>
+      <FILE id="EsNgsX" name="LookAndFeel.h" compile="0" resource="0" file="../../src/LookAndFeel.h"/>
+      <FILE id="A5s2cG" name="LuaLib.cpp" compile="1" resource="0" file="../../src/LuaLib.cpp"/>
+      <FILE id="c4GkdP" name="Main.cpp" compile="1" resource="0" file="../../src/Main.cpp"/>
+      <FILE id="slEQfH" name="MainComponent.cpp" compile="1" resource="0"
+            file="../../src/MainComponent.cpp"/>
+      <FILE id="cyEBF9" name="MainComponent.h" compile="0" resource="0" file="../../src/MainComponent.h"/>
+      <FILE id="vQXKx2" name="Settings.cpp" compile="1" resource="0" file="../../src/Settings.cpp"/>
+      <FILE id="JPqv1E" name="Settings.h" compile="0" resource="0" file="../../src/Settings.h"/>
+      <FILE id="tpy8j3" name="VirtualKeyboard.h" compile="0" resource="0"
+            file="../../src/VirtualKeyboard.h"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" microphonePermissionNeeded="0" cameraPermissionNeeded="0"
                iosInAppPurchases="0" iosPushNotifications="0">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="MIDI Controller" osxArchitecture="64BitIntel"
-                       osxCompatibility="10.8 SDK"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="MIDI Controller" codeSigningIdentity="9511F5241B78B0D38961CD756873066A5F0ED225"
                        osxCompatibility="10.8 SDK" osxArchitecture="64BitIntel"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="MIDI Controller" osxArchitecture="64BitIntel"
+                       osxCompatibility="10.8 SDK"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="juce_audio_basics" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_devices" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_core" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_data_structures" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_events" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_graphics" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_gui_basics" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="kv_gui" path="../libs/kv/modules"/>
-        <MODULEPATH id="kv_models" path="../libs/kv/modules"/>
-        <MODULEPATH id="juce_cryptography" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_utils" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_processors" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_formats" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_gui_extra" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="kv_core" path="../libs/kv/modules"/>
+        <MODULEPATH id="juce_audio_basics"/>
+        <MODULEPATH id="juce_audio_devices"/>
+        <MODULEPATH id="juce_core"/>
+        <MODULEPATH id="juce_data_structures"/>
+        <MODULEPATH id="juce_events"/>
+        <MODULEPATH id="juce_graphics"/>
+        <MODULEPATH id="juce_gui_basics"/>
+        <MODULEPATH id="juce_cryptography"/>
+        <MODULEPATH id="juce_audio_utils"/>
+        <MODULEPATH id="juce_audio_processors"/>
+        <MODULEPATH id="juce_audio_formats"/>
+        <MODULEPATH id="juce_gui_extra"/>
       </MODULEPATHS>
     </XCODE_MAC>
     <VS2017 targetFolder="Builds/VisualStudio2017">
@@ -52,23 +55,40 @@
                        winArchitecture="x64"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="kv_models" path="../libs/kv/modules"/>
-        <MODULEPATH id="kv_gui" path="../libs/kv/modules"/>
-        <MODULEPATH id="juce_gui_extra" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_gui_basics" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_graphics" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_events" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_data_structures" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_cryptography" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_core" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_utils" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_processors" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_formats" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_devices" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="juce_audio_basics" path="../libs/JUCE/modules"/>
-        <MODULEPATH id="kv_core" path="../libs/kv/modules"/>
+        <MODULEPATH id="juce_gui_extra"/>
+        <MODULEPATH id="juce_gui_basics"/>
+        <MODULEPATH id="juce_graphics"/>
+        <MODULEPATH id="juce_events"/>
+        <MODULEPATH id="juce_data_structures"/>
+        <MODULEPATH id="juce_cryptography"/>
+        <MODULEPATH id="juce_core"/>
+        <MODULEPATH id="juce_audio_utils"/>
+        <MODULEPATH id="juce_audio_processors"/>
+        <MODULEPATH id="juce_audio_formats"/>
+        <MODULEPATH id="juce_audio_devices"/>
+        <MODULEPATH id="juce_audio_basics"/>
       </MODULEPATHS>
     </VS2017>
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra"/>
+        <MODULEPATH id="juce_gui_basics"/>
+        <MODULEPATH id="juce_graphics"/>
+        <MODULEPATH id="juce_events"/>
+        <MODULEPATH id="juce_data_structures"/>
+        <MODULEPATH id="juce_cryptography"/>
+        <MODULEPATH id="juce_core"/>
+        <MODULEPATH id="juce_audio_utils"/>
+        <MODULEPATH id="juce_audio_processors"/>
+        <MODULEPATH id="juce_audio_formats"/>
+        <MODULEPATH id="juce_audio_devices"/>
+        <MODULEPATH id="juce_audio_basics"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
   </EXPORTFORMATS>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
@@ -83,9 +103,6 @@
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
-    <MODULE id="kv_core" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
-    <MODULE id="kv_gui" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
-    <MODULE id="kv_models" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
   </MODULES>
   <LIVE_SETTINGS>
     <OSX/>
