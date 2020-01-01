@@ -56,10 +56,13 @@ def configure (conf):
     conf.env.VERSION_STRING = VERSION
 
     conf.define ('VERSION_STRING', conf.env.VERSION_STRING)
-    conf.check_cfg (package='juce_audio_utils_debug-5' if conf.options.debug else 'juce_audio_utils-5', 
-                    uselib_store='JUCE_AUDIO_UTILS', args='--cflags --libs', mandatory=True)
-    conf.check_cfg (package='kv_gui_debug-0' if conf.options.debug else 'kv_gui-0', 
-                    uselib_store='KV', args='--cflags --libs', mandatory=False)
+
+    pkg='juce_audio_utils_debug-5' if conf.options.debug else 'juce_audio_utils-5'
+    conf.check_cfg (package=pkg, uselib_store='JUCE_AUDIO_UTILS',
+                    args=['%s >= 5.4.5' % pkg, '--cflags', '--libs'], mandatory=True)
+
+    # conf.check_cfg (package='kv_gui_debug-0' if conf.options.debug else 'kv_gui-0', 
+    #                 uselib_store='KV', args='--cflags --libs', mandatory=False)
     
     print
     juce.display_header ("Virtual MIDI Controller")
