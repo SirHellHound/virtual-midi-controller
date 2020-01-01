@@ -54,6 +54,7 @@ public:
     void audioDeviceStopped() override;
     void audioDeviceError (const String& errorMessage) override;
 
+    //=========================================================================
     virtual void handleIncomingMidiMessage (MidiInput*, const MidiMessage&) override {}
     virtual void handlePartialSysexMessage (MidiInput*, const uint8*,
                                             int, double) override {}
