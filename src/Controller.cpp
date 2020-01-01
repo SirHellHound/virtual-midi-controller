@@ -59,7 +59,7 @@ struct Controller::Impl : public MidiKeyboardStateListener
 Controller::Controller()
 {
     impl.reset (new Impl());
-    
+    impl->init();
 }
 
 Controller::~Controller()

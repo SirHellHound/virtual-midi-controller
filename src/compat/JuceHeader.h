@@ -2,7 +2,9 @@
 #pragma once
 
 #include <juce/juce.h>
+#if HAVE_KV
 #include <kv/gui.h>
+#endif
 
 using namespace juce;
 

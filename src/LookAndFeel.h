@@ -23,6 +23,7 @@
 
 namespace vmc {
 
+#if HAVE_KV
 class LookAndFeel : public kv::LookAndFeel_KV1
 {
 public:
@@ -31,5 +32,12 @@ public:
         setColour (Slider::backgroundColourId, kv::LookAndFeel_KV1::widgetBackgroundColor.darker());
     }
 };
+#else
+class LookAndFeel : public juce::LookAndFeel_V4
+{
+public:
+    LookAndFeel() = default;
+};
+#endif
 
 }

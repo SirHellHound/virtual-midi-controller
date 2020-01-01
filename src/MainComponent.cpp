@@ -146,7 +146,11 @@ public:
 
     void paint (Graphics& g) override
     {
+       #if HAVE_KV
         g.fillAll (kv::LookAndFeel_KV1::widgetBackgroundColor.darker());
+       #else
+        g.fillAll (Colours::black);
+       #endif
     }
 
     void resized() override

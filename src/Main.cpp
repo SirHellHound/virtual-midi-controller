@@ -76,7 +76,6 @@ public:
               controller (vc)
         {
             setUsingNativeTitleBar (true);
-            setBackgroundColour (kv::LookAndFeel_KV1::widgetBackgroundColor.darker());
             setContentOwned (new MainComponent (vc), true);
             
             if (auto* props = controller.getSettings().getUserSettings())
