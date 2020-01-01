@@ -73,23 +73,23 @@ def configure (conf):
     juce.display_msg (conf, "CXXFLAGS", conf.env.CXXFLAGS)
     juce.display_msg (conf, "LINKFLAGS", conf.env.LINKFLAGS)
 
-def build_mac (bld):
+def build (bld):
     appEnv = bld.env.derive()
     app = bld.program (
         source      = bld.path.ant_glob ("src/**/*.cpp"),
-        includes    = [ 'src', 'src/compat', 'libs/lua', 'libs/lua/lua-5.3.5/src' ],
-        target      = 'Applications/MIDI Controller',
+        includes    = [ 'src', 'src/compat', 'libs/lua', 
+                        'libs/lua/lua-5.3.5/src' ],
+        target      = 'bin/virtual-midi-controller',
         name        = 'VMC',
         env         = appEnv,
         use         = [ 'KV', 'JUCE_AUDIO_UTILS' ]
     )
+
     if juce.is_mac():
         app.mac_app     = True,
         app.mac_plist   = 'tools/macdeploy/Info.plist'
         # app.mac_files   = [ 'project/Builds/MacOSX/Icon.icns' ]
-
-def build (bld):
-    build_mac (bld)
+        app.target      = 'Applications/MIDI Controller'
 
 def macdeploy (ctx):
     call (["tools/macdeploy/appbundle.py",
