@@ -27,21 +27,31 @@ struct Controller::Impl : public MidiKeyboardStateListener
     ~Impl() { }
 
     Settings settings;
-    OptionalScopedPointer<AudioDeviceManager> devices;
+    OptionalScopedPointer<AudioDeviceManager> audioDeviceManager;
     std::unique_ptr<MidiOutput> midiOut;
     MidiKeyboardState keyboardState;
+
+    void init()
+    {
+        audioDeviceManager.setOwned (new AudioDeviceManager ());
+       #if JUCE_MAC
+        midiOut.reset (MidiOutput::createNewDevice ("VMC"));
+        midiOut->startBackgroundThread();
+       #endif
+        keyboardState.addListener (this);
+    }
 
     void handleNoteOn (MidiKeyboardState*, int midiChannel, int midiNoteNumber, float velocity) override
     {
         midiOut->sendMessageNow (MidiMessage::noteOn (midiChannel, midiNoteNumber, velocity));
-        if (auto* dout = devices->getDefaultMidiOutput())
+        if (auto* dout = audioDeviceManager->getDefaultMidiOutput())
             dout->sendMessageNow (MidiMessage::noteOn (midiChannel, midiNoteNumber, velocity));
     }
 
     void handleNoteOff (MidiKeyboardState*, int midiChannel, int midiNoteNumber, float velocity) override
     {
         midiOut->sendMessageNow (MidiMessage::noteOff (midiChannel, midiNoteNumber, velocity));
-        if (auto* dout = devices->getDefaultMidiOutput())
+        if (auto* dout = audioDeviceManager->getDefaultMidiOutput())
             dout->sendMessageNow (MidiMessage::noteOff (midiChannel, midiNoteNumber, velocity));
     }
 };
@@ -49,12 +59,7 @@ struct Controller::Impl : public MidiKeyboardStateListener
 Controller::Controller()
 {
     impl.reset (new Impl());
-    impl->devices.setOwned (new AudioDeviceManager ());
-   #if JUCE_MAC
-    impl->midiOut.reset (MidiOutput::createNewDevice ("VMC"));
-    impl->midiOut->startBackgroundThread();
-   #endif
-    impl->keyboardState.addListener (impl.get());
+    
 }
 
 Controller::~Controller()
@@ -130,12 +135,12 @@ File Controller::getSamplesPath()
 
 MidiKeyboardState& Controller::getMidiKeyboardState()         { return impl->keyboardState; }
 Settings& Controller::getSettings()                           { return impl->settings; }
-AudioDeviceManager& Controller::getDeviceManager()            { return *impl->devices; }
+AudioDeviceManager& Controller::getDeviceManager()            { return *impl->audioDeviceManager; }
 
 void Controller::addMidiMessage (const MidiMessage msg)
 {
     impl->midiOut->sendMessageNow (msg);
-    if (auto* const dout = impl->devices->getDefaultMidiOutput())
+    if (auto* const dout = impl->audioDeviceManager->getDefaultMidiOutput())
         dout->sendMessageNow (msg);
 }
 
