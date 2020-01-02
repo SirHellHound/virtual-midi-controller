@@ -43,14 +43,16 @@ struct Controller::Impl : public MidiKeyboardStateListener
 
     void handleNoteOn (MidiKeyboardState*, int midiChannel, int midiNoteNumber, float velocity) override
     {
-        midiOut->sendMessageNow (MidiMessage::noteOn (midiChannel, midiNoteNumber, velocity));
+        if (midiOut)
+            midiOut->sendMessageNow (MidiMessage::noteOn (midiChannel, midiNoteNumber, velocity));
         if (auto* dout = audioDeviceManager->getDefaultMidiOutput())
             dout->sendMessageNow (MidiMessage::noteOn (midiChannel, midiNoteNumber, velocity));
     }
 
     void handleNoteOff (MidiKeyboardState*, int midiChannel, int midiNoteNumber, float velocity) override
     {
-        midiOut->sendMessageNow (MidiMessage::noteOff (midiChannel, midiNoteNumber, velocity));
+        if (midiOut)
+            midiOut->sendMessageNow (MidiMessage::noteOff (midiChannel, midiNoteNumber, velocity));
         if (auto* dout = audioDeviceManager->getDefaultMidiOutput())
             dout->sendMessageNow (MidiMessage::noteOff (midiChannel, midiNoteNumber, velocity));
     }
@@ -137,7 +139,8 @@ AudioDeviceManager& Controller::getDeviceManager()            { return *impl->au
 
 void Controller::addMidiMessage (const MidiMessage msg)
 {
-    impl->midiOut->sendMessageNow (msg);
+    if (impl->midiOut)
+        impl->midiOut->sendMessageNow (msg);
     if (auto* const dout = impl->audioDeviceManager->getDefaultMidiOutput())
         dout->sendMessageNow (msg);
 }

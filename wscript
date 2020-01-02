@@ -42,9 +42,9 @@ def configure_product_name (conf):
 
 def configure (conf):
     conf.check_ccache()
+    conf.prefer_clang()
     conf.load ("compiler_c compiler_cxx ar cross juce")
     conf.check_cxx_version()
-
     silence_warnings (conf)
 
     conf.check_common()
